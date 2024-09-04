@@ -1,9 +1,15 @@
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import DocumentAnalysisClient
 
+# Version to read document from an URL
+
+# pip install azure-ai-formrecognizer==3.3.3
+
+
 # Store connection information
-endpoint = "<Endpoint URL>"
-key = "<API Key>"
+endpoint = "https://inova-di.cognitiveservices.azure.com/"
+key = "62d85884307545a185a7a51e3e13e0bb"
+
 
 fileUri = "https://github.com/MicrosoftLearning/mslearn-ai-document-intelligence/blob/main/Labfiles/01-prebuild-models/sample-invoice/sample-invoice.pdf?raw=true"
 fileLocale = "en-US"
@@ -13,12 +19,24 @@ print(f"\nConnecting to Forms Recognizer at: {endpoint}")
 print(f"Analyzing invoice at: {fileUri}")
 
 # Create the client
+document_analysis_client = DocumentAnalysisClient(
+    endpoint=endpoint, credential=AzureKeyCredential(key)
+)
 
-# Analyse the invoice
+# Analyze the invoice
+
+poller = document_analysis_client.begin_analyze_document_from_url(
+    fileModelId, fileUri, locale=fileLocale
+)
 
 # Display invoice information to the user
 
+receipts = poller.result()
 
+for idx, receipt in enumerate(receipts.documents):
+    vendor_name = receipt.fields.get("VendorName")
+    if vendor_name:
+        print(f"\nVendor Name: {vendor_name.value}, with confidence {vendor_name.confidence}.")
 
 
     customer_name = receipt.fields.get("CustomerName")

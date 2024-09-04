@@ -6,11 +6,7 @@ lab:
 
 # Use prebuilt Document Intelligence models
 
-In this exercise, you'll set up an Azure AI Document Intelligence resource in your Azure subscription. You'll use both the Azure AI Document Intelligence Studio and C# or Python to submit forms to that resource for analysis.
-
-## Create an Azure AI Document Intelligence resource
-
-Before you can call the Azure AI Document Intelligence service, you must create a resource to host that service in Azure:
+In this exercise, you'll set up an Azure AI Document Intelligence  ou must create a resource to host that service in Azure:
 
 1. In a browser tab, open the Azure portal at [https://portal.azure.com](https://portal.azure.com?azure-portal=true), signing in with the Microsoft account associated with your Azure subscription.
 1. On the Azure portal home page, navigate to the top search box and type **Document Intelligence** and then press **Enter**.
